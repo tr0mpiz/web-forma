@@ -6,6 +6,50 @@
     <title>Admin - FORMA</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+                /* Responsive: Mobile Styles */
+                @media (max-width: 900px) {
+                    .admin-sidebar {
+                        position: absolute;
+                        left: -280px;
+                        top: 0;
+                        width: 220px;
+                        height: 100vh;
+                        transition: left 0.3s;
+                        z-index: 1001;
+                    }
+                    .admin-sidebar.active {
+                        left: 0;
+                    }
+                    .admin-content {
+                        margin-left: 0;
+                        padding: 15px;
+                    }
+                    .hamburger-admin {
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: center;
+                        width: 40px;
+                        height: 40px;
+                        cursor: pointer;
+                        position: fixed;
+                        top: 15px;
+                        left: 15px;
+                        z-index: 1002;
+                        background: #fff;
+                        border-radius: 50%;
+                        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+                    }
+                    .hamburger-admin span {
+                        display: block;
+                        width: 28px;
+                        height: 4px;
+                        margin: 4px 0;
+                        background: #1e3a5f;
+                        border-radius: 2px;
+                        transition: 0.3s;
+                    }
+                }
         * {
             margin: 0;
             padding: 0;
@@ -274,9 +318,14 @@
     </style>
 </head>
 <body>
+    <div class="hamburger-admin" id="hamburgerAdmin" aria-label="Abrir menú" tabindex="0" style="display:none;">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
     <div class="admin-container">
         <!-- Sidebar -->
-        <div class="admin-sidebar">
+        <div class="admin-sidebar" id="adminSidebar">
             <h2>FORMA Admin</h2>
             <ul>
                 <li><a href="#" onclick="mostrarSeccion('dashboard')" class="nav-link active">
@@ -637,5 +686,30 @@
     </div>
 
     <script src="admin.js"></script>
+    <script>
+    // Mostrar hamburguesa solo en móvil
+    function checkHamburgerAdmin() {
+        const hamburger = document.getElementById('hamburgerAdmin');
+        if (window.innerWidth <= 900) {
+            hamburger.style.display = 'flex';
+        } else {
+            hamburger.style.display = 'none';
+            document.getElementById('adminSidebar').classList.remove('active');
+        }
+    }
+    window.addEventListener('resize', checkHamburgerAdmin);
+    window.addEventListener('DOMContentLoaded', checkHamburgerAdmin);
+    // Hamburguesa para menú admin
+    const hamburgerAdmin = document.getElementById('hamburgerAdmin');
+    const adminSidebar = document.getElementById('adminSidebar');
+    hamburgerAdmin.addEventListener('click', () => {
+        adminSidebar.classList.toggle('active');
+    });
+    document.addEventListener('click', function(e) {
+        if (window.innerWidth <= 900 && !adminSidebar.contains(e.target) && !hamburgerAdmin.contains(e.target)) {
+            adminSidebar.classList.remove('active');
+        }
+    });
+    </script>
 </body>
 </html>

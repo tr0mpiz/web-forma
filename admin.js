@@ -41,7 +41,11 @@ document.getElementById('categoriaImagen').addEventListener('change', function(e
     }
 });
 
-const API_URL = 'http://localhost:3001/api';
+// Detecta entorno y ajusta API_URL
+const API_URL =
+    window.location.hostname === 'localhost'
+        ? 'http://localhost:3001/api'
+        : 'https://TU_DOMINIO_RENDER/api'; // Reemplaza TU_DOMINIO_RENDER por el dominio real de tu API en Render
 
 // Mostrar/Ocultar secciones
 function mostrarSeccion(seccion) {

@@ -21,7 +21,12 @@
             <div class="logo">
                 <img src="images/logoforma.png" alt="FORMA Logo">
             </div>
-            <nav class="nav-menu">
+            <div class="hamburger" id="hamburgerBtn" aria-label="Abrir menú" tabindex="0">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <nav class="nav-menu" id="navMenu">
                 <a href="#inicio">Inicio</a>
                 <a href="#productos">Productos</a>
                 <a href="#stock">Stock</a>
@@ -318,4 +323,18 @@
 
     <script src="script.js"></script>
 </body>
+<script>
+// Hamburguesa para menú móvil
+const hamburgerBtn = document.getElementById('hamburgerBtn');
+const navMenu = document.getElementById('navMenu');
+hamburgerBtn.addEventListener('click', () => {
+    navMenu.classList.toggle('active');
+});
+// Cerrar menú al hacer click fuera
+document.addEventListener('click', function(e) {
+    if (!navMenu.contains(e.target) && !hamburgerBtn.contains(e.target)) {
+        navMenu.classList.remove('active');
+    }
+});
+</script>
 </html>
