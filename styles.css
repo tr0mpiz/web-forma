@@ -1,83 +1,34 @@
-/* Utilidades para visibilidad en móvil */
-.mobile-hide {
-    display: block;
-}
-.mobile-show {
-    display: none;
-}
 @media (max-width: 600px) {
-    .mobile-hide {
-        display: none !important;
-    }
-    .mobile-show {
-        display: block !important;
-    }
-    .carousel-slide .slide-background:not(:nth-child(2)) {
-        display: none !important;
-    }
-    .carousel-slide .slide-content {
-        display: none !important;
-    }
-}
-@media (max-width: 600px) {
-    .carousel-slide {
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: stretch !important;
-        justify-content: flex-start !important;
-        min-height: 180px;
-    }
-    .carousel-slide .slide-background {
-        width: 100% !important;
-        height: 140px !important;
-        display: block !important;
-        margin-bottom: 0;
-        order: 1;
-        position: relative !important;
-        z-index: 1;
-    }
-    .carousel-slide .slide-background:not(:first-of-type) {
-        display: none !important;
-    }
-    .carousel-slide .slide-content {
-        width: 100% !important;
-        padding: 16px 8px !important;
-        min-height: 80px;
-        box-sizing: border-box;
-        margin-top: 0 !important;
-        order: 2;
-        background: #1e3a5f !important;
-        color: #fff !important;
-        z-index: 2;
-        position: relative;
-    }
-    .carousel-slide .slide-content:not(:first-of-type) {
-        display: none !important;
-    }
-    .carousel-slide .btn {
+    .banner-top {
+        position: fixed;
+        top: 0;
+        left: 0;
         width: 100%;
-        margin-top: 10px;
-        font-size: 14px;
-        padding: 10px 0;
+        z-index: 2000;
     }
-}
-}
-}
-/* Carrusel: solo un slide-content en móvil */
-@media (max-width: 600px) {
-    .carousel-slide {
-        flex-direction: column !important;
-        align-items: center !important;
-        justify-content: center !important;
+    .header {
+        margin-top: 45px;
     }
-    .slide-background {
-        display: none !important;
+    .header-content {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        padding: 5px 5px;
     }
-    .slide-content {
-        width: 100% !important;
-        padding: 20px 10px !important;
-        min-height: 120px;
-        box-sizing: border-box;
+    .logo {
+        order: 2;
+        margin-left: 8px;
+    }
+    .cart-icon {
+        order: 1;
+        margin-right: 8px;
+    }
+    .hamburger {
+        position: fixed;
+        top: 8px;
+        left: 8px;
+        z-index: 2001;
     }
 }
 * {
