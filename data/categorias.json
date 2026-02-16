@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "nombre": "Racks",
+    "descripcion": "Estanterías y sistemas de almacenamiento",
+    "imagen": "/images/rackdeforme-1770744938130-1770745466207.jpeg"
+  },
+  {
+    "id": 2,
+    "nombre": "Mesas",
+    "descripcion": "Mesas de diversos estilos y tamaños",
+    "imagen": "/images/carrousel1-1770745474699.jpeg"
+  },
+  {
+    "id": 3,
+    "nombre": "Sillones",
+    "descripcion": "Sillones cómodos y elegantes",
+    "imagen": "/images/dsc09548-copia-ee09b97cce577817d517417880580410-1024-1024-1770748877607.webp"
+  },
+  {
+    "id": 4,
+    "nombre": "Accesorios",
+    "descripcion": "Complementos y decoración",
+    "imagen": "/images/dsc04278-ff3268453435f0e2de17297903086520-1024-1024-1770748913240.webp"
+  },
+  {
+    "id": 5,
+    "nombre": "Bibliotecas",
+    "descripcion": "Muebles para almacenamiento de libros",
+    "imagen": "/images/ffffaa-1770745500450.jpeg"
+  },
+  {
+    "id": 6,
+    "nombre": "Vajilleros",
+    "descripcion": "Muebles para almacenamiento de vajilla",
+    "imagen": "/images/ffffaa-1770745485890-1770745508717.jpeg"
+  }
+]

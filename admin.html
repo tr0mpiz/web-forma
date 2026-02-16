@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - FORMA</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        .admin-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .admin-sidebar {
+            width: 280px;
+            background-color: #1e3a5f;
+            color: white;
+            padding: 20px;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .admin-sidebar h2 {
+            margin-bottom: 30px;
+            font-size: 24px;
+        }
+
+        .admin-sidebar ul {
+            list-style: none;
+        }
+
+        .admin-sidebar li {
+            margin-bottom: 15px;
+        }
+
+        .admin-sidebar a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .admin-sidebar a:hover,
+        .admin-sidebar a.active {
+            background-color: #0099d8;
+        }
+
+        .admin-content {
+            margin-left: 280px;
+            flex: 1;
+            padding: 30px;
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .admin-header h1 {
+            font-size: 28px;
+            color: #1e3a5f;
+        }
+
+        .admin-header a {
+            background-color: #0099d8;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        /* Tabla */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        table th {
+            background-color: #1e3a5f;
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        table td {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        table tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        .btn {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background-color: #0099d8;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #0073b1;
+        }
+
+        .btn-danger {
+            background-color: #ff6b6b;
+            color: white;
+            font-size: 12px;
+            padding: 6px 12px;
+        }
+
+        .btn-danger:hover {
+            background-color: #ff5252;
+        }
+
+        .btn-edit {
+            background-color: #2c4a6f;
+            color: white;
+            font-size: 12px;
+            padding: 6px 12px;
+        }
+
+        /* Formulario */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #1e3a5f;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin-bottom: 30px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 0;
+            cursor: pointer;
+        }
+
+        .checkbox-group input {
+            width: auto;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 8px;
+            max-width: 600px;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .close {
+            font-size: 28px;
+            cursor: pointer;
+            color: #999;
+        }
+
+        .close:hover {
+            color: #1e3a5f;
+        }
+
+        .success {
+            background-color: #4caf50;
+            color: white;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+
+        .error {
+            background-color: #ff6b6b;
+            color: white;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <div class="admin-sidebar">
+            <h2>FORMA Admin</h2>
+            <ul>
+                <li><a href="#" onclick="mostrarSeccion('dashboard')" class="nav-link active">
+                    <i class="fas fa-chart-line"></i> Dashboard
+                </a></li>
+                <li><a href="#" onclick="mostrarSeccion('productos')" class="nav-link">
+                    <i class="fas fa-box"></i> Productos
+                </a></li>
+                <li><a href="#" onclick="mostrarSeccion('colecciones')" class="nav-link">
+                    <i class="fas fa-th"></i> Colecciones
+                </a></li>
+                <li><a href="#" onclick="mostrarSeccion('categorias')" class="nav-link">
+                    <i class="fas fa-tags"></i> Categorías
+                </a></li>
+                <li><a href="#" onclick="mostrarSeccion('banner')" class="nav-link">
+                    <i class="fas fa-bullhorn"></i> Banner
+                </a></li>
+                <li><a href="#" onclick="mostrarSeccion('carousel')" class="nav-link">
+                    <i class="fas fa-images"></i> Carousel
+                </a></li>
+                <li><a href="index.html" style="margin-top: 30px; background-color: #0099d8;">
+                    <i class="fas fa-home"></i> Volver al sitio
+                </a></li>
+            </ul>
+        </div>
+
+        <!-- Contenido -->
+        <div class="admin-content">
+            <!-- Dashboard -->
+            <div id="dashboard" class="section active">
+                <div class="admin-header">
+                    <h1>Dashboard</h1>
+                </div>
+                <div class="form-container">
+                    <h2>Estadísticas</h2>
+                    <p>Total de productos: <strong id="totalProductos">0</strong></p>
+                    <p>Total de colecciones: <strong id="totalColecciones">0</strong></p>
+                    <p>Productos en sale: <strong id="productosEnSale">0</strong></p>
+                </div>
+            </div>
+
+            <!-- Productos -->
+            <div id="productos" class="section">
+                <div class="admin-header">
+                    <h1>Gestión de Productos</h1>
+                    <button class="btn btn-primary" onclick="abrirFormularioProducto()">+ Nuevo Producto</button>
+                </div>
+
+                <div id="mensajeProducto"></div>
+
+                <div class="form-container" id="formularioProductoContainer" style="display:none;">
+                    <h2>Agregar/Editar Producto</h2>
+                    <form id="formularioProducto">
+                        <input type="hidden" id="productoId">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Nombre</label>
+                                <input type="text" id="productoNombre" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Precio</label>
+                                <input type="number" id="productoPrecio" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Descripción</label>
+                            <textarea id="productoDescripcion" required></textarea>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Alto (cm)</label>
+                                <input type="number" id="productoAlto">
+                            </div>
+                            <div class="form-group">
+                                <label>Ancho (cm)</label>
+                                <input type="number" id="productoAncho">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Profundidad (cm)</label>
+                                <input type="number" id="productoProfundidad">
+                            </div>
+                            <div class="form-group">
+                                <label>Color</label>
+                                <input type="text" id="productoColor">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Colección</label>
+                                <select id="productoColeccion" required></select>
+                            </div>
+                            <div class="form-group">
+                                <label>Categoría</label>
+                                <select id="productoCategoria" required></select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Imagen</label>
+                            <input type="file" id="productoImagen" accept=".jpg,.jpeg,.png,.gif,.webp">
+                            <small>Selecciona una imagen (JPEG, JPG, PNG, GIF, WebP)</small>
+                            <div id="productoImagenPreview" style="margin-top: 10px;"></div>
+                        </div>
+
+                        <div class="checkbox-group">
+                            <label>
+                                <input type="checkbox" id="productoSale"> Sale
+                            </label>
+                            <label>
+                                <input type="checkbox" id="productoStock" checked> En Stock
+                            </label>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Cantidad en Stock</label>
+                            <input type="number" id="productoCantidadStock" value="1">
+                        </div>
+
+                        <!-- Variantes del Producto -->
+                        <div class="form-group">
+                            <h3 style="margin-top: 20px; margin-bottom: 15px;">Variantes del Producto</h3>
+                            <small>Agrega diferentes opciones de alto, ancho, profundidad y color</small>
+                            <div id="variantesContainer" style="margin-top: 15px;"></div>
+                            <button type="button" class="btn btn-secondary" style="margin-top: 10px; background-color: #5ba3d0;" onclick="agregarVariante()">+ Agregar Variante</button>
+                        </div>
+
+                        <div style="gap: 10px; display: flex;">
+                            <button type="submit" class="btn btn-primary">Guardar Producto</button>
+                            <button type="button" class="btn" style="background-color: #ccc;" onclick="cerrarFormularioProducto()">Cancelar</button>
+                        </div>
+                    </form>
+                </div>
+
+                <table id="tablaProductos">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Precio</th>
+                            <th>Colección</th>
+                            <th>Sale</th>
+                            <th>Stock</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <!-- Colecciones -->
+            <div id="colecciones" class="section">
+                <div class="admin-header">
+                    <h1>Gestión de Colecciones</h1>
+                    <button class="btn btn-primary" onclick="abrirFormularioColeccion()">+ Nueva Colección</button>
+                </div>
+
+                <div id="mensajeColeccion"></div>
+
+                <div class="form-container" id="formularioColeccionContainer" style="display:none;">
+                    <h2>Agregar/Editar Colección</h2>
+                    <form id="formularioColeccion">
+                        <input type="hidden" id="coleccionId">
+                        <div class="form-group">
+                            <label>Nombre</label>
+                            <input type="text" id="coleccionNombre" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Descripción</label>
+                            <textarea id="coleccionDescripcion" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Imagen</label>
+                            <input type="file" id="coleccionImagen" accept=".jpg,.jpeg,.png,.gif,.webp">
+                            <small>Selecciona una imagen (JPEG, JPG, PNG, GIF, WebP)</small>
+                            <div id="coleccionImagenPreview" style="margin-top: 10px;"></div>
+                        </div>
+                        <div style="gap: 10px; display: flex;">
+                            <button type="submit" class="btn btn-primary">Guardar Colección</button>
+                            <button type="button" class="btn" style="background-color: #ccc;" onclick="cerrarFormularioColeccion()">Cancelar</button>
+                        </div>
+                    </form>
+                </div>
+
+                <table id="tablaColecciones">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Descripción</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <!-- Categorías -->
+            <div id="categorias" class="section">
+                <div class="admin-header">
+                    <h1>Gestión de Categorías</h1>
+                    <button class="btn btn-primary" onclick="abrirFormularioCategoria()">+ Nueva Categoría</button>
+                </div>
+
+                <div id="mensajeCategoria"></div>
+
+                <div class="form-container" id="formularioCategoriaContainer" style="display:none;">
+                    <h2>Agregar/Editar Categoría</h2>
+                    <form id="formularioCategoria">
+                        <input type="hidden" id="categoriaId">
+                        <div class="form-group">
+                            <label>Nombre</label>
+                            <input type="text" id="categoriaNombre" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Descripción</label>
+                            <textarea id="categoriaDescripcion" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Imagen</label>
+                            <input type="file" id="categoriaImagen" accept=".jpg,.jpeg,.png,.gif,.webp">
+                            <small>Selecciona una imagen (JPEG, JPG, PNG, GIF, WebP)</small>
+                            <div id="categoriaImagenPreview" style="margin-top: 10px;"></div>
+                        </div>
+                        <div style="gap: 10px; display: flex;">
+                            <button type="submit" class="btn btn-primary">Guardar Categoría</button>
+                            <button type="button" class="btn" style="background-color: #ccc;" onclick="cerrarFormularioCategoria()">Cancelar</button>
+                        </div>
+                    </form>
+                </div>
+
+                <table id="tablaCategorias">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Descripción</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <!-- Banner -->
+            <div id="banner" class="section">
+                <div class="admin-header">
+                    <h1>Configuración del Banner</h1>
+                </div>
+
+                <div id="mensajeBanner"></div>
+
+                <div class="form-container">
+                    <h2>Editar Mensaje del Banner</h2>
+                    <form id="formularioBanner">
+                        <div class="form-group">
+                            <label>Mensaje del Banner</label>
+                            <textarea id="bannerMensaje" required placeholder="Ingresa el mensaje que aparecerá en el banner de la página principal..."></textarea>
+                            <small>Puedes usar | para separar múltiples mensajes</small>
+                        </div>
+                        <div style="gap: 10px; display: flex;">
+                            <button type="submit" class="btn btn-primary">Guardar Banner</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div style="margin-top: 30px; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                    <h2 style="margin-bottom: 15px;">Vista Previa</h2>
+                    <div style="background-color: #1e3a5f; color: #f5f5f5; text-align: center; padding: 12px; font-size: 13px; border-radius: 4px;">
+                        <div id="bannerPreview" style="overflow: hidden; white-space: nowrap;">
+                            Cargando preview...
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Carousel -->
+            <div id="carousel" class="section">
+                <div class="admin-header">
+                    <h1>Gestión del Carousel</h1>
+                    <button class="btn btn-primary" onclick="abrirFormularioCarousel()">+ Nuevo Slide</button>
+                </div>
+
+                <div id="mensajeCarousel"></div>
+
+                <div class="form-container" id="formularioCarouselContainer" style="display:none;">
+                    <h2>Agregar/Editar Slide</h2>
+                    <form id="formularioCarousel">
+                        <input type="hidden" id="carouselId">
+                        <div class="form-group">
+                            <label>Título</label>
+                            <input type="text" id="carouselTitulo" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Descripción</label>
+                            <textarea id="carouselDescripcion" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Tipo de Media</label>
+                            <select id="carouselTipo" required onchange="actualizarTipoMedia()">
+                                <option value="imagen">Imagen</option>
+                                <option value="video">Video</option>
+                                <option value="ninguno">Sin Media</option>
+                            </select>
+                        </div>
+                        <div class="form-group" id="grupoMediaArchivo" style="display: none;">
+                            <label>Selecciona el archivo</label>
+                            <input type="file" id="carouselMediaArchivo" accept="image/*,video/*">
+                            <small id="archivoInfo"></small>
+                        </div>
+                        <div class="form-group" id="grupoMediaURL" style="display: none;">
+                            <label>URL de la media (YouTube, imagen online, video, etc)</label>
+                            <input type="text" id="carouselMediaURL" placeholder="https://youtube.com/watch?v=... o https://ejemplo.com/imagen.jpg">
+                            <small>Para YouTube: pega el link directo del video</small>
+                        </div>
+                        <div class="form-group">
+                            <div id="carouselMediaPreview" style="margin-top: 10px;"></div>
+                        </div>
+                        <div class="form-group">
+                            <label>Texto del Botón</label>
+                            <input type="text" id="carouselBotonTexto" required placeholder="Ej: Ver Sale">
+                        </div>
+                        <div class="form-group">
+                            <label>Link del Botón</label>
+                            <input type="text" id="carouselBotonLink" required placeholder="Ej: #sale o https://ejemplo.com">
+                        </div>
+                        <div class="checkbox-group">
+                            <label>
+                                <input type="checkbox" id="carouselActivo" checked>
+                                Activo
+                            </label>
+                        </div>
+                        <div style="gap: 10px; display: flex;">
+                            <button type="submit" class="btn btn-primary">Guardar Slide</button>
+                            <button type="button" class="btn" style="background-color: #ccc;" onclick="cerrarFormularioCarousel()">Cancelar</button>
+                        </div>
+                    </form>
+                </div>
+
+                <table id="tablaCarousel">
+                    <thead>
+                        <tr>
+                            <th>Título</th>
+                            <th>Tipo</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>

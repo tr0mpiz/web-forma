@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "nombre": "Desface",
+    "descripcion": "Diseños minimalista",
+    "imagen": "/images/rackforma-1770744910634.jpeg"
+  },
+  {
+    "id": 2,
+    "nombre": "Volumen",
+    "descripcion": "Estilo industrial con estructuras de metal",
+    "imagen": "/images/rackdeforme-1770744938130.jpeg"
+  }
+]

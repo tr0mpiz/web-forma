@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "titulo": "Ofertas Especiales",
+    "descripcion": "Hasta 50% de descuento en artículos seleccionados",
+    "tipo_media": "imagen",
+    "media_url": "/images/dsc04278-ff3268453435f0e2de17297903086520-1024-1024-1770749704147-1770994097233-1770996999911.webp",
+    "boton_texto": "Ver Sale",
+    "boton_link": "#sale",
+    "activo": true
+  },
+  {
+    "id": 2,
+    "titulo": "Nueva Colección",
+    "descripcion": "Descubre nuestros nuevos diseños 2026",
+    "tipo_media": "video",
+    "media_url": "/images/WhatsApp Video 2026-02-12 at 4.01.34 PM-1770997103330.mp4",
+    "boton_texto": "Ver Colecciones",
+    "boton_link": "#colecciones",
+    "activo": true
+  }
+]

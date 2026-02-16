@@ -1,0 +1,153 @@
+[
+  {
+    "id": 1,
+    "nombre": "Cabinet Forma T1",
+    "descripcion": "Estantes curvos en cerámica, diseño moderno y minimalista",
+    "precio": 12990,
+    "imagen": "images/rackdeforme.jpeg",
+    "alto": 180,
+    "ancho": 80,
+    "profundidad": 40,
+    "color": "Terracota",
+    "categoria": "Racks",
+    "coleccion": "Desface",
+    "sale": false,
+    "stock": true,
+    "cantidad_stock": 5,
+    "variantes": [
+      {
+        "alto": 150,
+        "ancho": 333,
+        "profundidad": 35,
+        "color": "Blanco",
+        "precio": 12490
+      },
+      {
+        "alto": 150,
+        "ancho": 555,
+        "profundidad": 35,
+        "color": "Negro",
+        "precio": 13490
+      },
+      {
+        "alto": 180,
+        "ancho": 666,
+        "profundidad": 40,
+        "color": "Terracota",
+        "precio": 12990
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "nombre": "Estantería Forma Metal Roja",
+    "descripcion": "Marco de metal con 5 estantes ajustables, estructura industrial",
+    "precio": 8490,
+    "imagen": "images/rackforma.jpeg",
+    "alto": 200,
+    "ancho": 150,
+    "profundidad": 35,
+    "color": "Rojo",
+    "categoria": "Racks",
+    "coleccion": "Desface",
+    "sale": false,
+    "stock": true,
+    "cantidad_stock": 8,
+    "variantes": [
+      {
+        "alto": 111,
+        "ancho": 222,
+        "profundidad": 333,
+        "color": "AZUL",
+        "precio": 8990
+      },
+      {
+        "alto": 555,
+        "ancho": 66,
+        "profundidad": 777,
+        "color": "ROJO",
+        "precio": 8490
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "nombre": "Mueble TV Forma Azul",
+    "descripcion": "Panel minimalista con patas cilíndricas, perfecto para salas",
+    "precio": 15890,
+    "imagen": "images/ffffaa.jpeg",
+    "alto": 50,
+    "ancho": 200,
+    "profundidad": 45,
+    "color": "Azul",
+    "categoria": "Mesas",
+    "coleccion": "Volumen",
+    "sale": true,
+    "stock": true,
+    "cantidad_stock": 3
+  },
+  {
+    "id": 4,
+    "nombre": "Credenza Forma Teal",
+    "descripcion": "Mueble curvado con formas redondeadas, almacenamiento elegante",
+    "precio": 18490,
+    "imagen": "images/WhatsApp Image 2026-02-10 at 1.08.30 PM.jpeg",
+    "alto": 80,
+    "ancho": 160,
+    "profundidad": 50,
+    "color": "Teal",
+    "categoria": "Vajilleros",
+    "coleccion": "Volumen",
+    "sale": false,
+    "stock": true,
+    "cantidad_stock": 2
+  },
+  {
+    "id": 5,
+    "nombre": "Sillón Neptuno Boucle",
+    "descripcion": "Tapizado boucle premium gris, confort máximo",
+    "precio": 9890,
+    "imagen": "images/rackdeforme.jpeg",
+    "alto": 85,
+    "ancho": 90,
+    "profundidad": 95,
+    "color": "Gris",
+    "categoria": "Sillones",
+    "coleccion": "Desface",
+    "sale": false,
+    "stock": true,
+    "cantidad_stock": 4
+  },
+  {
+    "id": 6,
+    "nombre": "Cuadro Desfa",
+    "descripcion": "Cuadro ",
+    "precio": 15000,
+    "alto": 1000,
+    "ancho": 100,
+    "profundidad": 2,
+    "color": "",
+    "coleccion": "Desface",
+    "categoria": "Accesorios",
+    "imagen": "/images/dsc04278-ff3268453435f0e2de17297903086520-1024-1024-1770749704147.webp",
+    "sale": false,
+    "stock": true,
+    "cantidad_stock": 1
+  },
+  {
+    "id": 7,
+    "nombre": "nic ola",
+    "descripcion": "asdfasdfasdf",
+    "precio": 1213,
+    "alto": 111,
+    "ancho": 11,
+    "profundidad": -1111,
+    "color": "11",
+    "coleccion": "Desface",
+    "categoria": "Racks",
+    "imagen": "/images/dsc04278-ff3268453435f0e2de17297903086520-1024-1024-1770749704147-1770994097233.webp",
+    "sale": false,
+    "stock": true,
+    "cantidad_stock": 1
+  }
+]
