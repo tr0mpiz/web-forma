@@ -1064,21 +1064,41 @@ function renderizarCarousel() {
             }
         }
         
-        slideDiv.innerHTML = `
-            <div class="slide-content">
-                <h2>${slide.titulo}</h2>
-                <p>${slide.descripcion}</p>
-            </div>
-            <div class="slide-background" style="position: relative; width: 100%; height: 100%;">
-                ${mediaHTML}
-                <div class="slide-overlay"></div>
-                <button class="btn btn-primary" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 15;" onclick="window.location.href='${slide.boton_link}'">${slide.boton_texto}</button>
-            </div>
-            <div class="slide-content">
-                <h2>${slide.titulo}</h2>
-                <p>${slide.descripcion}</p>
-            </div>
-        `;
+        // Detectar móvil
+        const isMobile = window.innerWidth <= 600;
+        if (isMobile) {
+            slideDiv.innerHTML = `
+                <div class="slide-content">
+                    <h2>${slide.titulo}</h2>
+                    <p>${slide.descripcion}</p>
+                </div>
+                <div class="slide-background" style="position: relative; width: 100%; height: 100%;">
+                    ${mediaHTML}
+                    <div class="slide-overlay"></div>
+                    <button class="btn btn-primary" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 15;" onclick="window.location.href='${slide.boton_link}'">${slide.boton_texto}</button>
+                </div>
+                <div class="slide-content">
+                    <h2>${slide.titulo}</h2>
+                    <p>${slide.descripcion}</p>
+                </div>
+            `;
+        } else {
+            slideDiv.innerHTML = `
+                <div class="slide-content">
+                    <h2>${slide.titulo}</h2>
+                    <p>${slide.descripcion}</p>
+                </div>
+                <div class="slide-background" style="position: relative; width: 100%; height: 100%;">
+                    ${mediaHTML}
+                    <div class="slide-overlay"></div>
+                    <button class="btn btn-primary" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 15;" onclick="window.location.href='${slide.boton_link}'">${slide.boton_texto}</button>
+                </div>
+                <div class="slide-content">
+                    <h2>${slide.titulo}</h2>
+                    <p>${slide.descripcion}</p>
+                </div>
+            `;
+        }
         
         container.appendChild(slideDiv);
         
@@ -1141,20 +1161,24 @@ function mostrarSlideCarousel(index) {
     } else {
         currentCarouselSlide = index;
     }
-    
+
     // Remover clase active de todos
     slides.forEach(slide => slide.classList.remove('active'));
     dots.forEach(dot => dot.classList.remove('active'));
-    
+
     // Agregar clase active al slide actual
     if (slides[currentCarouselSlide]) {
         slides[currentCarouselSlide].classList.add('active');
     }
-    
+
+    // Calcular el índice real del slide (ignorando duplicados)
+    let realIndex = currentCarouselSlide - 1;
+    if (currentCarouselSlide === 0) realIndex = dots.length - 1;
+    if (currentCarouselSlide === slides.length - 1) realIndex = 0;
+
     // Agregar clase active al dot correspondiente
-    const dotIndex = currentCarouselSlide - 1;
-    if (dotIndex >= 0 && dotIndex < totalDots && dots[dotIndex]) {
-        dots[dotIndex].classList.add('active');
+    if (realIndex >= 0 && realIndex < totalDots && dots[realIndex]) {
+        dots[realIndex].classList.add('active');
     }
 }
 
