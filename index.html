@@ -8,6 +8,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+    <!-- Banner de Ofertas con efecto Roller -->
+    <div class="banner-top">
+        <div class="banner-content">
+            <span class="banner-message" id="bannerMessage">20% off por transferencia | 6 cuotas sin interés | Envío gratis a partir de $1M en CABA</span>
+        </div>
+    </div>
+
     <!-- Header -->
     <header class="header">
         <div class="header-content">
@@ -31,22 +38,22 @@
                     </div>
                 </div>
                 <div class="nav-dropdown">
-                    <!-- ...existing code... -->
+                    <a href="#catalogos">Catálogos <i class="fas fa-chevron-down"></i></a>
+                    <div class="dropdown-menu" id="catalogosMenu">
+                        <!-- Se cargará dinámicamente desde la API -->
+                    </div>
                 </div>
             </nav>
-            <!-- ...existing code... -->
+            <div class="header-actions">
+                <input type="text" class="search-box" placeholder="Buscar...">
+                <a href="#login" class="login-link">Login</a>
+                <a href="#carrito" class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
         </div>
     </header>
-
-    <!-- ...existing code... -->
-            <!-- Banner de Ofertas con efecto Roller -->
-            <div class="banner-top">
-                <div class="banner-content">
-                    <span class="banner-message" id="bannerMessage">20% off por transferencia | 6 cuotas sin interés | Envío gratis a partir de $1M en CABA</span>
-                </div>
-            </div>
-        <!-- Duplicado eliminado: header-content -->
-    <!-- ...existing code... -->
 
     <!-- Carrusel Principal -->
     <section class="carousel" id="inicio">
@@ -100,44 +107,44 @@
 
 
     <!-- Footer -->
-    <header class="header">
-        <div class="header-content">
-            <div class="logo">
-                <img src="images/logoforma.png" alt="FORMA Logo">
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Contacto</h4>
+                <p><i class="fas fa-whatsapp"></i> <a href="https://wa.me/541165075229">+54 9 11 6507-5229</a></p>
+                <p><i class="fas fa-envelope"></i> <a href="mailto:hola@forma.com.ar">hola@forma.com.ar</a></p>
+                <p><i class="fas fa-map-marker-alt"></i> Santa Rosa 3755, Florida Oeste, Vicente Lopez</p>
             </div>
-            <div class="hamburger" id="hamburgerBtn" aria-label="Abrir menú" tabindex="0">
-                <span></span>
-                <span></span>
-                <span></span>
+            <div class="footer-section">
+                <h4>Seguinos</h4>
+                <div class="social-links">
+                    <a href="https://instagram.com/forma" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
+                    <a href="https://facebook.com/forma" target="_blank"><i class="fab fa-facebook"></i> Facebook</a>
+                    <a href="https://tiktok.com/@forma" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a>
+                    <a href="https://pinterest.com/forma" target="_blank"><i class="fab fa-pinterest"></i> Pinterest</a>
+                </div>
             </div>
-            <nav class="nav-menu" id="navMenu">
-                <a href="#inicio">Inicio</a>
-                <a href="#productos">Productos</a>
-                <a href="#stock">Stock</a>
-                <a href="#sale">Sale</a>
-                <div class="nav-dropdown">
-                    <a href="#colecciones">Colecciones <i class="fas fa-chevron-down"></i></a>
-                    <div class="dropdown-menu" id="coleccionesMenu">
-                        <!-- Se cargará dinámicamente desde la API -->
-                    </div>
-                </div>
-                <div class="nav-dropdown">
-                    <a href="#catalogos">Catálogos <i class="fas fa-chevron-down"></i></a>
-                    <div class="dropdown-menu" id="catalogosMenu">
-                        <!-- Se cargará dinámicamente desde la API -->
-                    </div>
-                </div>
-            </nav>
-            <div class="header-actions">
-                <input type="text" class="search-box" placeholder="Buscar...">
-                <a href="#login" class="login-link">Login</a>
-                <a href="#carrito" class="cart-icon">
-                    <i class="fas fa-shopping-cart"></i>
-                    <span class="cart-count">0</span>
-                </a>
+            <div class="footer-section">
+                <h4>Información</h4>
+                <ul>
+                    <li><a href="#productos">Productos</a></li>
+                    <li><a href="#sale">Sale</a></li>
+                    <li><a href="#colecciones">Colecciones</a></li>
+                    <li><a href="#catalogos">Catálogos</a></li>
+                </ul>
             </div>
         </div>
-    </header>
+        <div class="footer-bottom">
+            <p>&copy; 2026 FORMA - Todos los derechos reservados</p>
+            <p>Defensa de las y los consumidores. Para reclamos <a href="https://www.argentina.gob.ar/produccion/defensadelconsumidor/formulario" target="_blank">ingresá acá</a></p>
+        </div>
+    </footer>
+
+    <!-- Modal Detalle Producto -->
+    <div id="productModal" class="product-modal">
+        <div class="product-modal-content">
+            <span class="close-btn">&times;</span>
+            <div class="product-detail">
                 <div class="zoom-wrapper">
                     <div class="product-detail-image" id="zoomContainer">
                         <img id="modalProductImage" src="" alt="Producto">
